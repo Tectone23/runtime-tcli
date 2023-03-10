@@ -2,7 +2,7 @@ runner: python
 install:
   artifacts: "https://raw.githubusercontent.com/Tectone23/MobileRuntime/main/config.json"
   cmd_nix:
-    - "mv config.json $HOME/.tre-config.json"
+    - "mv ./config/config.json $HOME/.tre-config.json"
     - "python3 ./src/main.py --headless-init"
 actions:
   run_api: "--cog_path={cog_path}"
