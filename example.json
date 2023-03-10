@@ -1,0 +1,13 @@
+{
+    "runtime": {
+        "1": {
+            "name": "Example version",
+            "changelog":[
+                "Some stuff was added",
+                "Some stuff was removed"
+            ],
+            "size": 40,
+            "url": "http://google.com"
+        }
+    }
+}
