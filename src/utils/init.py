@@ -1,6 +1,6 @@
 import importlib
 import json
-from os import walk, path, mkdir, getenv, chdir, getcwd
+from os import walk, path, mkdir, getenv, chdir, getcwd, makedirs
 import platform
 import re
 from types import ModuleType
@@ -70,25 +70,26 @@ class Init:
         # Load config
         self.config = json.load(
             open(
-                "./config/config.json",
+                path.expanduser('~')+"/.tre-config.json",
                 "r"
             )
         )
 
         self.cog_path = cog_path
-        if not path.exists("./src/resources/runtime.py"):
+        if not path.exists(path.join(getenv('HOME'), ".tcore_emulated", "src/resources/runtime.py")):
             self.env: Resolve = self.resolve_version(version)
         self.preprocessor = preprocessor
 
-        # Start watching
-        watch = Nelka(
-            event_handler= EventHandler(
-                on_modified= self.set_routes
-            ),
-            track_only= [cog_path]
-        )
+        # Start watching if cog path specified
+        if cog_path is not None:
+            watch = Nelka(
+                event_handler= EventHandler(
+                    on_modified= self.set_routes
+                ),
+                track_only= [cog_path]
+            )
 
-        watch.start()
+            watch.start()
 
         if service:
             self.service = Service()
@@ -130,8 +131,11 @@ class Init:
             runtime = runtime.toString()
         )
 
+        if not path.exists(path.join(getenv('HOME'), ".tcore_emulated", "src/resources/")):
+            makedirs(path.join(getenv('HOME'), ".tcore_emulated", "src/resources/"))
+    
         # Save runtime
-        with open("src/resources/runtime.py", "w+") as f:
+        with open(path.join(getenv('HOME'), ".tcore_emulated", "src/resources/runtime.py"), "w+") as f:
             f.write(runtime.toString())
 
         return resolve
