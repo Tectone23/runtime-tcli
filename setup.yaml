@@ -10,6 +10,6 @@ actions:
     # Host a FakeAsgard API
     run_api: "--cog_path={cog_path}"
     # Run in CLI with an interactive shell
-    run_interactive: "--cog_path={cog_path} --interactive"
+    run_interactive: "--cog_path={arg} --interactive"
     # Get version
     version: "--version"
