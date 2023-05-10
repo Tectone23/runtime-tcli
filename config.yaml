@@ -3,14 +3,15 @@ install:
     # Set up latest config
     artifacts:
     - "https://raw.githubusercontent.com/Tectone23/MobileRuntime/main/.tre_config.json"
+
     cmd_nix:
     - "mv config.json ~/.tre-config.json"
     - "./src/main.py --headless-init"
     
 actions:
     # Host a FakeAsgard API
-    run_api: "--cog_path={arg}"
+    run_api: "python3 src/main.py --pre=mypy --cog_path=%arg%"
     # Run in CLI with an interactive shell
-    run_interactive: "--cog_path={arg} --interactive"
+    run_interactive: "python3 src/main.py --pre=mypy --cog_path=%arg%"
     # Get version
     version: "--version"
