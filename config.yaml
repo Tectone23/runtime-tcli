@@ -2,7 +2,7 @@ runner: python
 install:
     # Set up latest config
     artifacts:
-    - "https://raw.githubusercontent.com/Tectone23/MobileRuntime/main/.tre_config.json"
+    - "https://raw.githubusercontent.com/Tectone23/MobileRuntime/main/.tre-config.json"
 
     cmd_nix:
     - "mv config.json ~/.tre-config.json"
